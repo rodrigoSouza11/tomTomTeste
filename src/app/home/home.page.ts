@@ -18,7 +18,8 @@ export class HomePage {
   positionSubscription: any;
   routeGroup: any
   routeOptions: any
-  trackedRoute = [];
+  
+  marker : any;
 
   constructor() {
     
@@ -26,7 +27,7 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.a()
-    this.e()    
+    //this.e()    
 }
 
 async mapStart(){
@@ -120,9 +121,10 @@ async getLocation() {
 
 async pointCentralMark(){
   const posicaoAtual: Position = await Geolocation.getCurrentPosition() 
-  let marker = new tt.Marker({color: 'red'}).setLngLat(this.center).addTo(this.map);   
+  this.marker = new tt.Marker({color: 'red'}).setLngLat(this.center).addTo(this.map); 
+   
   
-  this.e()
+  //this.e()
   //this.aa()
 }
 
@@ -140,19 +142,22 @@ async e(){
 
   let n = await Geolocation.watchPosition(options, (pos) => {
     if(pos){
+    this.marker.remove()     
       
     this.center = { lng: pos.coords.longitude, lat: pos.coords.latitude }
-    let marker = {}
-    marker = new tt.Marker({color: 'red'}).setLngLat(this.center).addTo(this.map);
+    
+    let marker = new tt.Marker({color: 'green'}).setLngLat(this.center).addTo(this.map);
+    
     let marker2 = new tt.Marker({color: 'black'}).setLngLat(this.destino).addTo(this.map);
     
     console.log(pos,this.center, 'qqqq')
+    this.calculateRoute()
     return 
     }
     
   })  
 
-  this.calculateRoute()
+  
 }}
 
     
