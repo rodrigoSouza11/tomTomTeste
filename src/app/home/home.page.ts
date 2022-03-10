@@ -140,8 +140,10 @@ export class HomePage {
 
       let marker2 = new tt.Marker({ color: 'black' }).setLngLat(this.destino).addTo(this.map);
 
-      console.log(pos, this.center, 'qqqq')
-
+      console.log(pos, this.center, 'qqqq')      
+      this.map.setCenter(this.center)
+      this.map.setZoom(16)
+      this.map.setBearing(180)
       return this.calculateRoute()
     })
   }
