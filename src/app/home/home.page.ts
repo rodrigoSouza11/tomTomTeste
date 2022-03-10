@@ -20,6 +20,7 @@ export class HomePage {
   routeOptions: any
 
   marker: any;
+  marker3: any;
 
   constructor() {
 
@@ -120,6 +121,12 @@ export class HomePage {
   async pointCentralMark() {
     const posicaoAtual: Position = await Geolocation.getCurrentPosition()
     this.marker = new tt.Marker({ color: 'red' }).setLngLat(this.center).addTo(this.map);
+    let marker2 = new tt.Marker({ color: 'black' }).setLngLat(this.destino).addTo(this.map);
+    this.map.setCenter(this.center)
+      this.map.setZoom(15)
+      this.map.setBearing(180)
+      //this.map.setPitch ( 300 )
+    return this.calculateRoute()
   }
 
   async e() {
@@ -128,10 +135,10 @@ export class HomePage {
       timeout: 10000,
       maximumAge: 0
     }
-
+    
     let n = await Geolocation.watchPosition(options, (pos) => {
       console.log(pos, 'iiiii')
-      this.marker.remove()
+      this.marker.remove()      
       console.log('1')
 
       this.center = { lng: pos.coords.longitude, lat: pos.coords.latitude }
@@ -142,9 +149,10 @@ export class HomePage {
 
       console.log(pos, this.center, 'qqqq')      
       this.map.setCenter(this.center)
-      this.map.setZoom(16)
+      this.map.setZoom(15)
       this.map.setBearing(180)
-      return this.calculateRoute()
+      //this.map.setPitch ( 300 )
+      
     })
   }
 }
