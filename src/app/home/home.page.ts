@@ -112,8 +112,6 @@ export class HomePage {
 
   }
 
-
-
   async getLocation() {
     //const posicaoAtual: Position = await Geolocation.getCurrentPosition();
     //console.log('a', posicaoAtual )  
@@ -122,44 +120,20 @@ export class HomePage {
   async pointCentralMark() {
     const posicaoAtual: Position = await Geolocation.getCurrentPosition()
     this.marker = new tt.Marker({ color: 'red' }).setLngLat(this.center).addTo(this.map);
-
-
-    //this.e()
-    //this.aa()
   }
 
-
-
-  async e() { 
+  async e() {
     let options = {
       enableHighAccuracy: true,
       timeout: 10000,
       maximumAge: 0
     }
 
-     
-
     let n = await Geolocation.watchPosition(options, (pos) => {
       console.log(pos, 'iiiii')
       this.marker.remove()
       console.log('1')
-      return this.s(pos)  
-    })   
-    
-    
-  }
 
-  async s(pos) {
-    this.marker.remove()    
-    console.log('2')
-    return this.t(pos)
-    
-}
-
-async t(pos){
-  console.log('3')
-  this.marker.remove() 
-  console.log('4')
       this.center = { lng: pos.coords.longitude, lat: pos.coords.latitude }
 
       this.marker = new tt.Marker({ color: 'green', rotationAlignment: 'auto' }).setLngLat(this.center).addTo(this.map);
@@ -167,12 +141,10 @@ async t(pos){
       let marker2 = new tt.Marker({ color: 'black' }).setLngLat(this.destino).addTo(this.map);
 
       console.log(pos, this.center, 'qqqq')
-      
+
       return this.calculateRoute()
-}
-
-
-
+    })
+  }
 }
 
 
