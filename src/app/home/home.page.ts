@@ -137,34 +137,38 @@ export class HomePage {
       maximumAge: 0
     }
 
+     
+
     let n = await Geolocation.watchPosition(options, (pos) => {
       console.log(pos, 'iiiii')
-      this.marker.remove() 
+      this.marker.remove()
       console.log('1')
-      this.s(pos)     
+      return this.s(pos)  
     })   
+    
     
   }
 
   async s(pos) {
-    await this.marker.remove()    
-    this.t(pos)
+    this.marker.remove()    
     console.log('2')
+    return this.t(pos)
+    
 }
 
 async t(pos){
   console.log('3')
-  await this.marker.remove() 
+  this.marker.remove() 
   console.log('4')
       this.center = { lng: pos.coords.longitude, lat: pos.coords.latitude }
 
-      let marker = new tt.Marker({ color: 'green', rotationAlignment: 'auto' }).setLngLat(this.center).addTo(this.map);
+      this.marker = new tt.Marker({ color: 'green', rotationAlignment: 'auto' }).setLngLat(this.center).addTo(this.map);
 
       let marker2 = new tt.Marker({ color: 'black' }).setLngLat(this.destino).addTo(this.map);
 
       console.log(pos, this.center, 'qqqq')
-      this.calculateRoute()
-      return
+      
+      return this.calculateRoute()
 }
 
 
