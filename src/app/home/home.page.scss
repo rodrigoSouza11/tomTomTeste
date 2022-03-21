@@ -2,7 +2,15 @@
   text-align: center;
 }
 
+.mapabox{
+  height: 100%;
+  
+}
+
   #map {
-    height: calc(75% - 0px);
-    width: 100vw;  
+    height: calc(100% - 0px);
+    width: 100vw;
+    z-index: -1;  
     }
+
+   
